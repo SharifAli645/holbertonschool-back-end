@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """
+module that
+uses a REST API
 """
 import requests
 from sys import argv
