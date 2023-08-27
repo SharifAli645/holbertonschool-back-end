@@ -8,24 +8,20 @@ from sys import argv
 
 
 if __name__ == "__main__":
-    EMPLOYEE_NAME = ''
-    NUMBER_OF_DONE_TASKS = ''
-    TOTAL_NUMBER_OF_TASKS = ''
 
     url = f'https://jsonplaceholder.typicode.com/users/{argv[1]}'
     response = requests.get(url)
-    if response.status_code == 200:
-        json_data = response.json()
-        EMPLOYEE_NAME = json_data.get('name')
+    json_data = response.json()
+    emp_name = json_data.get('name')
 
     url = f'https://jsonplaceholder.typicode.com/todos?userId={argv[1]}'
     response = requests.get(url)
-    if response.status_code == 200:
-        json_data = response.json()
-        TOTAL_NUMBER_OF_TASKS = len(json_data)
-        complete_tasks = [x for x in json_data if x.get('completed')]
-        NUMBER_OF_DONE_TASKS = len(complete_tasks)
+    json_data = response.json()
+    tasks = len(json_data)
+    done_tasks = [x for x in json_data if x.get('completed')]
+    num_tasks = len(done_tasks)
 
-    print(f'Employee {EMPLOYEE_NAME} is done with tasks\
-({NUMBER_OF_DONE_TASKS}/{TOTAL_NUMBER_OF_TASKS}):')
-    [print('\t' + x.get('title')) for x in complete_tasks]
+    print(f'Employee {emp_name} is done with tasks\
+({num_tasks}/{tasks}):')
+    for x in done_tasks:
+        print(f"     {x.get('title')}")
