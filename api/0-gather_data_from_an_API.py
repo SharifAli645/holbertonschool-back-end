@@ -10,15 +10,13 @@ from sys import argv
 if __name__ == "__main__":
 
     url = f'https://jsonplaceholder.typicode.com/users/{argv[1]}'
-    response = requests.get(url)
-    json_data = response.json()
-    emp_name = json_data.get('name')
+    user = requests.get(url).json()
+    emp_name = user.get('name')
 
     url = f'https://jsonplaceholder.typicode.com/todos?userId={argv[1]}'
-    response = requests.get(url)
-    json_data = response.json()
-    tasks = len(json_data)
-    done_tasks = [x for x in json_data if x.get('completed')]
+    todo = requests.get(url).json()
+    tasks = len(todo)
+    done_tasks = [x for x in todo if x.get('completed')]
     num_task = len(done_tasks)
 
     print(f'Employee {emp_name} is done with tasks ({num_task}/{tasks}):')
