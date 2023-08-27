@@ -19,9 +19,8 @@ if __name__ == "__main__":
     json_data = response.json()
     tasks = len(json_data)
     done_tasks = [x for x in json_data if x.get('completed')]
-    num_tasks = len(done_tasks)
+    num_task = len(done_tasks)
 
-    print(f'Employee {emp_name} is done with tasks\
-({num_tasks}/{tasks}):')
+    print(f'Employee {emp_name} is done with tasks ({num_task}/{tasks}):')
     for x in done_tasks:
-        print(f"     {x.get('title')}")
+        print(f"\t {x.get('title')}")
